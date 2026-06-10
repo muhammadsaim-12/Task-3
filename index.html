@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-  <title>Catalog-Z | Photo & Video Gallery Template</title>
-  <!-- Bootstrap 5 (Alpha 2) + Font Awesome 5 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>Catalog-Z | Photo & Video Gallery Template (Plain CSS + Flexbox)</title>
+  <!-- Font Awesome 6 (free icons, no framework) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts for clean typography -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
   <style>
-    /* ========== ORIGINAL TEMPLATEMO-STYLE.CSS (pixel-perfect clone) ========== */
+    /* ---------- RESET & GLOBAL ---------- */
     * {
       margin: 0;
       padding: 0;
@@ -17,7 +17,7 @@
     }
 
     body {
-      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
       font-size: 1rem;
       font-weight: 400;
       line-height: 1.5;
@@ -25,7 +25,7 @@
       background-color: #fff;
     }
 
-    /* ----- Loader Animation (unchanged) ----- */
+    /* ---------- LOADER (same as original) ---------- */
     #loader-wrapper {
       position: fixed;
       top: 0;
@@ -105,49 +105,117 @@
       transition: all 0.3s 1s ease-out;
     }
 
-    /* ----- General Styles ----- */
+    /* ---------- TYPOGRAPHY & LINKS ---------- */
     p { line-height: 1.8; }
     a { text-decoration: none; transition: all 0.3s ease; }
     a:hover { color: #009999; }
-    .container-fluid { max-width: 1770px; }
-    .tm-container-small { max-width: 1050px; }
-    .btn { border-radius: 0; }
+
+    /* ---------- CONTAINERS ---------- */
+    .container-fluid {
+      max-width: 1770px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+    .tm-container-small {
+      max-width: 1050px;
+      margin: 0 auto;
+    }
+
+    /* ---------- BUTTONS ---------- */
+    .btn {
+      display: inline-block;
+      font-weight: 400;
+      text-align: center;
+      cursor: pointer;
+      border: 1px solid transparent;
+      padding: 0.375rem 0.75rem;
+      font-size: 1rem;
+      border-radius: 0;
+    }
     .btn-primary {
       background-color: #009999;
-      border: 0;
       border-radius: 5px;
       padding: 12px 50px 14px;
       font-size: 1.2rem;
+      color: #fff;
     }
-    .btn-primary:hover,
-    .btn-primary:focus { background-color: #086969; }
-    .btn-primary.disabled, 
-    .btn-primary:disabled {
+    .btn-primary:hover {
+      background-color: #086969;
+    }
+    .btn-primary.disabled {
       background-color: #009999;
-      pointer-events: all;
       cursor: not-allowed;
+      opacity: 0.65;
     }
-    .form-control {
-      padding: 10px 20px;
-      width: 100%;
-      height: auto;
+
+    /* ---------- NAVBAR (Flexbox, right aligned) ---------- */
+    .navbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 1rem;
+      background-color: #fff;
     }
-    .navbar-toggler:focus { box-shadow: none; }
     .navbar-brand {
       color: #3399CC;
       font-size: 1.6rem;
+      font-weight: 500;
     }
-    .navbar-brand i { font-size: 2rem; }
-    
-    /* ----- Hero Background (fixed) ----- */
+    .navbar-brand i {
+      font-size: 2rem;
+      margin-right: 0.5rem;
+    }
+    .navbar-toggler {
+      display: none;
+      background: none;
+      border: 1px solid #ddd;
+      padding: 0.25rem 0.75rem;
+      font-size: 1.25rem;
+      cursor: pointer;
+    }
+    .navbar-collapse {
+      flex-grow: 0;
+    }
+    .navbar-nav {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-item {
+      margin-right: 30px;
+    }
+    .nav-item:last-child {
+      margin-right: 0;
+    }
+    .nav-link {
+      color: #666666;
+      border-bottom: 4px solid transparent;
+      font-size: 1.2rem;
+      padding-bottom: 0.5rem;
+      display: inline-block;
+    }
+    .nav-link-1.active,
+    .nav-link-1:hover { border-color: #33CCFF; }
+    .nav-link-2.active,
+    .nav-link-2:hover { border-color: #FF6666; }
+    .nav-link-3.active,
+    .nav-link-3:hover { border-color: #33CC66; }
+    .nav-link-4.active,
+    .nav-link-4:hover { border-color: #CC66CC; }
+
+    /* ---------- HERO SECTION (background image, parallax) ---------- */
     .tm-hero {
       min-height: 220px;
       position: relative;
       background-image: url('img/hero.jpg');
       background-size: cover;
       background-position: center 30%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-    /* Dark overlay for better search visibility */
     .tm-hero::before {
       content: '';
       position: absolute;
@@ -161,52 +229,36 @@
     .tm-search-form {
       position: relative;
       z-index: 10;
-      width: auto;
+      display: flex;
       max-width: 500px;
+      width: 100%;
       margin: 0 auto;
+      justify-content: center;
     }
     .tm-search-input {
       width: 360px;
-      border-radius: 0;
       padding: 12px 15px;
       color: #009999;
       border: none;
+      font-size: 1rem;
     }
-    .tm-search-input:focus {
-      border-color: #009999;
-      box-shadow: 0 0 0 0.25rem rgba(0, 153, 153, 0.25);
+    .tm-search-input::placeholder {
+      color: #009999;
+      opacity: 1;
     }
-    .tm-search-input::placeholder { color: #009999; opacity: 1; }
     .tm-search-btn {
       color: white;
       background-color: #009999;
       border: none;
       width: 100px;
-      height: 50px;
-      margin-left: -1px;
+      cursor: pointer;
+      font-size: 1rem;
     }
-
-    /* ----- Navigation: RIGHT ALIGNMENT FIX ----- */
-    .navbar-nav {
-      margin-left: auto !important;   /* forces right alignment on desktop */
-    }
-    .nav-item { margin-right: 30px; }
-    .nav-item:last-child { margin-right: 0; }
-    .nav-link {
-      color: #666666;
-      border-bottom: 4px solid transparent;
+    .tm-search-btn i {
       font-size: 1.2rem;
     }
-    .nav-link-1.active,
-    .nav-link-1:hover { border-color: #33CCFF; }
-    .nav-link-2.active,
-    .nav-link-2:hover { border-color: #FF6666; }
-    .nav-link-3.active,
-    .nav-link-3:hover { border-color: #33CC66; }
-    .nav-link-4.active,
-    .nav-link-4:hover { border-color: #CC66CC; }
 
-    /* ----- Gallery & Cards (Ming effect) ----- */
+    /* ---------- GALLERY GRID (pure CSS Grid, responsive) ---------- */
     .tm-mt-60 { margin-top: 60px; }
     .tm-mb-90 { margin-bottom: 90px; }
     .tm-text-primary { color: #009999; }
@@ -214,56 +266,72 @@
     .tm-text-gray-light { color: #CCC; }
     .tm-input-paging {
       width: 40px;
-      border-radius: 0;
+      padding: 0.25rem;
       border: 1px solid #CCCCCC;
       background: #f4f4f4;
       text-align: center;
     }
+
+    /* Header row with page input */
+    .row-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .col-6 {
+      width: 50%;
+    }
+    .d-flex {
+      display: flex;
+    }
+    .justify-content-end {
+      justify-content: flex-end;
+    }
+    .align-items-center {
+      align-items: center;
+    }
+
+    /* Gallery Grid */
+    .tm-gallery {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+    /* Ming effect card */
     .tm-video-item {
       position: relative;
       overflow: hidden;
       text-align: center;
       cursor: pointer;
+      background: #030c17;
     }
     .tm-video-item img {
-      position: relative;
+      width: 100%;
+      height: auto;
       display: block;
-      min-height: 100%;
-      max-width: 100%;
-      opacity: 0.8;
+      opacity: 0.9;
+      transition: opacity 0.35s;
     }
     .tm-video-item figcaption {
-      padding: 2em;
-      color: #fff;
-      text-transform: uppercase;
-      font-size: 1.25em;
-      backface-visibility: hidden;
-    }
-    .tm-video-item figcaption,
-    .tm-video-item figcaption > a {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
+      padding: 2em;
+      color: #fff;
+      text-transform: uppercase;
+      font-size: 1.25em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      backface-visibility: hidden;
+      z-index: 2;
     }
-    .tm-video-item figcaption > a {
-      z-index: 1000;
-      text-indent: 200%;
-      white-space: nowrap;
-      font-size: 0;
-      opacity: 0;
-    }
-    .tm-video-item h2 {
-      word-spacing: -0.15em;
-      font-weight: 300;
-    }
-    figure.effect-ming { background: #030c17; }
-    figure.effect-ming img {
-      opacity: 0.9;
-      transition: opacity 0.35s;
-    }
-    figure.effect-ming figcaption::before {
+    .tm-video-item figcaption::before {
       position: absolute;
       top: 30px;
       right: 30px;
@@ -275,21 +343,55 @@
       opacity: 0;
       transition: opacity 0.35s, transform 0.35s;
       transform: scale3d(1.4,1.4,1);
+      z-index: -1;
     }
-    figure.effect-ming h2 {
-      font-size: 1.3em;
+    .tm-video-item h2 {
+      font-size: 1.3rem;
+      font-weight: 300;
+      margin: 0;
       opacity: 0;
       transition: opacity 0.35s, transform 0.35s;
       transform: scale(1.5);
     }
-    figure.effect-ming:hover figcaption::before,
-    figure.effect-ming:hover h2 {
+    .tm-video-item:hover img {
+      opacity: 0.4;
+    }
+    .tm-video-item:hover figcaption::before,
+    .tm-video-item:hover h2 {
       opacity: 1;
       transform: scale3d(1,1,1);
     }
-    figure.effect-ming:hover img { opacity: 0.4; }
+    .tm-video-item figcaption > a {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1000;
+      text-indent: 200%;
+      white-space: nowrap;
+      font-size: 0;
+      opacity: 0;
+    }
+    /* Card footer (date & views) */
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.75rem;
+      font-size: 0.9rem;
+    }
 
-    /* ----- Pagination ----- */
+    /* ---------- PAGINATION (Flexbox) ---------- */
+    .tm-paging-col {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .tm-paging {
+      display: flex;
+      gap: 0.5rem;
+    }
     .tm-paging-link {
       display: flex;
       justify-content: center;
@@ -299,29 +401,69 @@
       font-size: 1.1rem;
       color: #999;
       background-color: #EEEEEE;
-      margin: 10px;
       border-radius: 5px;
       transition: all 0.3s ease;
+      cursor: pointer;
     }
-    .tm-paging-link:hover,
-    .tm-paging-link.active {
+    .tm-paging-link.active,
+    .tm-paging-link:hover {
       background-color: #009999;
       color: #fff;
     }
 
-    /* ----- Footer ----- */
-    .tm-bg-gray { background-color: #EEEEEE; }
-    .tm-footer { font-size: 0.95rem; }
-    .tm-footer-title { font-size: 1.4rem; }
-    .tm-footer-links li {
-      list-style: none;
-      margin-bottom: 5px;    
+    /* ---------- FOOTER (Flexbox) ---------- */
+    .tm-bg-gray {
+      background-color: #EEEEEE;
     }
-    .tm-footer-links li a { color: #999999; }
-    .tm-footer-links li a:hover { color: #009999; }
-    .tm-social-links li {
+    .tm-footer {
+      font-size: 0.95rem;
+      padding: 3rem 0 1rem;
+    }
+    .tm-footer-title {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+    }
+    .footer-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    .footer-col {
+      padding: 0 1rem;
+      margin-bottom: 2rem;
+    }
+    .footer-col-about {
+      flex: 2;
+      min-width: 250px;
+    }
+    .footer-col-links {
+      flex: 1;
+      min-width: 180px;
+    }
+    .footer-col-social {
+      flex: 1;
+      min-width: 200px;
+      text-align: right;
+    }
+    .tm-footer-links {
       list-style: none;
-      margin-right: 15px;
+      padding-left: 0;
+    }
+    .tm-footer-links li {
+      margin-bottom: 5px;
+    }
+    .tm-footer-links li a {
+      color: #999999;
+    }
+    .tm-footer-links li a:hover {
+      color: #009999;
+    }
+    .tm-social-links {
+      display: flex;
+      justify-content: flex-end;
+      list-style: none;
+      margin-bottom: 1.5rem;
+      gap: 15px;
     }
     .tm-social-links li a {
       color: #999999;
@@ -331,368 +473,332 @@
       background-color: #fff;
       align-items: center;
       justify-content: center;
+      border-radius: 0;
+      transition: all 0.3s ease;
     }
     .tm-social-links li a:hover {
       color: #fff;
       background-color: #009999;
     }
+    .copyright-row {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      border-top: 1px solid #ddd;
+      padding-top: 1.5rem;
+      margin-top: 1rem;
+    }
+    .text-right {
+      text-align: right;
+    }
+    .d-block {
+      display: block;
+    }
 
-    /* ----- Responsive Overrides ----- */
+    /* ---------- RESPONSIVE (Media Queries) ---------- */
+    @media (max-width: 1199px) {
+      .tm-gallery {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
     @media (max-width: 991px) {
+      .navbar-toggler {
+        display: block;
+      }
       .navbar-collapse {
         position: fixed;
-        top: 50px;
-        right: 0px;
+        top: 60px;
+        right: 0;
         background: white;
         width: 150px;
         padding: 15px;
+        box-shadow: -2px 2px 10px rgba(0,0,0,0.1);
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        z-index: 1000;
+      }
+      .navbar-collapse.show {
+        transform: translateX(0);
       }
       .navbar-nav {
-        margin-left: 0 !important;
+        flex-direction: column;
+      }
+      .nav-item {
+        margin-right: 0;
+        margin-bottom: 15px;
+      }
+      .tm-gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .footer-col-social {
+        text-align: left;
+      }
+      .tm-social-links {
+        justify-content: flex-start;
       }
     }
     @media (max-width: 767px) {
-      .tm-paging-col { flex-direction: column; }
-      .tm-paging { flex-wrap: wrap; }
+      .tm-paging-col {
+        flex-direction: column;
+        gap: 20px;
+      }
+      .tm-paging {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
     }
     @media (max-width: 575px) {
-      .tm-search-input { width: 100%; max-width: 360px; }
-      .tm-search-form { padding: 0 15px; justify-content: center; }
+      .tm-gallery {
+        grid-template-columns: 1fr;
+      }
+      .row-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .col-6 {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+      .justify-content-end {
+        justify-content: flex-start;
+      }
+      .tm-search-input {
+        width: 100%;
+        max-width: 360px;
+      }
+      .tm-search-form {
+        padding: 0 15px;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Page Loader -->
+  <!-- Loader (same as original) -->
   <div id="loader-wrapper">
     <div id="loader"></div>
     <div class="loader-section section-left"></div>
     <div class="loader-section section-right"></div>
   </div>
 
-  <!-- Navigation Bar (Right-aligned tabs) -->
-  <nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <i class="fas fa-film me-2"></i>
-        Catalog-Z
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-bars"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link nav-link-1 active" aria-current="page" href="#">Photos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link nav-link-2" href="#">Videos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link nav-link-3" href="#">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link nav-link-4" href="#">Contact</a>
-          </li>
-        </ul>
-      </div>
+  <!-- Navigation Bar (pure flexbox, no Bootstrap) -->
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <i class="fas fa-film"></i> Catalog-Z
+    </div>
+    <button class="navbar-toggler" id="navbarToggler" aria-label="Toggle navigation">
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link nav-link-1 active" href="#">Photos</a></li>
+        <li class="nav-item"><a class="nav-link nav-link-2" href="#">Videos</a></li>
+        <li class="nav-item"><a class="nav-link nav-link-3" href="#">About</a></li>
+        <li class="nav-item"><a class="nav-link nav-link-4" href="#">Contact</a></li>
+      </ul>
     </div>
   </nav>
 
-  <!-- Hero Section with Background Image & Search -->
-  <div class="tm-hero d-flex justify-content-center align-items-center" data-parallax="scroll" data-image-src="img/hero.jpg">
-    <form class="d-flex tm-search-form">
-      <input class="form-control tm-search-input" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success tm-search-btn" type="submit">
-        <i class="fas fa-search"></i>
-      </button>
+  <!-- Hero with Parallax Background -->
+  <div class="tm-hero" data-parallax="scroll" data-image-src="img/hero.jpg">
+    <form class="tm-search-form">
+      <input class="tm-search-input" type="search" placeholder="Search" aria-label="Search">
+      <button class="tm-search-btn" type="submit"><i class="fas fa-search"></i></button>
     </form>
   </div>
 
-  <!-- Main Gallery Content -->
-  <div class="container-fluid tm-container-content tm-mt-60">
-    <div class="row mb-4">
-      <h2 class="col-6 tm-text-primary">Latest Photos</h2>
-      <div class="col-6 d-flex justify-content-end align-items-center">
-        <form action="" class="tm-text-primary">
-          Page <input type="text" value="1" size="1" class="tm-input-paging tm-text-primary"> of 200
-        </form>
-      </div>
-    </div>
-    <div class="row tm-mb-90 tm-gallery">
-      <!-- 16 gallery items (exactly as original) -->
-      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-        <figure class="effect-ming tm-video-item">
-          <img src="img/img-03.jpg" alt="Clocks" class="img-fluid">
-          <figcaption class="d-flex align-items-center justify-content-center">
-            <h2>Clocks</h2>
-            <a href="#">View more</a>
-          </figcaption>
-        </figure>
-        <div class="d-flex justify-content-between tm-text-gray">
-          <span class="tm-text-gray-light">18 Oct 2020</span>
-          <span>9,906 views</span>
-        </div>
-      </div>
-      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-        <figure class="effect-ming tm-video-item">
-          <img src="img/img-04.jpg" alt="Plants" class="img-fluid">
-          <figcaption class="d-flex align-items-center justify-content-center">
-            <h2>Plants</h2>
-            <a href="#">View more</a>
-          </figcaption>
-        </figure>
-        <div class="d-flex justify-content-between tm-text-gray">
-          <span class="tm-text-gray-light">14 Oct 2020</span>
-          <span>16,100 views</span>
-        </div>
-      </div>
-      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-        <figure class="effect-ming tm-video-item">
-          <img src="img/img-05.jpg" alt="Morning" class="img-fluid">
-          <figcaption class="d-flex align-items-center justify-content-center">
-            <h2>Morning</h2>
-            <a href="#">View more</a>
-          </figcaption>
-        </figure>
-        <div class="d-flex justify-content-between tm-text-gray">
-          <span class="tm-text-gray-light">12 Oct 2020</span>
-          <span>12,460 views</span>
-        </div>
-      </div>
-      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-        <figure class="effect-ming tm-video-item">
-          <img src="img/img-06.jpg" alt="Pinky" class="img-fluid">
-          <figcaption class="d-flex align-items-center justify-content-center">
-            <h2>Pinky</h2>
-            <a href="#">View more</a>
-          </figcaption>
-        </figure>
-        <div class="d-flex justify-content-between tm-text-gray">
-          <span class="tm-text-gray-light">10 Oct 2020</span>
-          <span>11,402 views</span>
-        </div>
-      </div>
-      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-        <figure class="effect-ming tm-video-item">
-          <img src="img/img-01.jpg" alt="Hangers" class="img-fluid">
-          <figcaption class="d-flex align-items-center justify-content-center">
-            <h2>Hangers</h2>
-            <a href="#">View more</a>
-          </figcaption>
-        </figure>
-        <div class="d-flex justify-content-between tm-text-gray">
-          <span class="tm-text-gray-light">24 Sep 2020</span>
-          <span>16,008 views</span>
-        </div>
-      </div>
-      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-        <figure class="effect-ming tm-video-item">
-          <img src="img/img-02.jpg" alt="Perfumes" class="img-fluid">
-          <figcaption class="d-flex align-items-center justify-content-center">
-            <h2>Perfumes</h2>
-            <a href="#">View more</a>
-          </figcaption>
-        </figure>
-        <div class="d-flex justify-content-between tm-text-gray">
-          <span class="tm-text-gray-light">20 Sep 2020</span>
-          <span>12,860 views</span>
-        </div>
-      </div>
-      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-        <figure class="effect-ming tm-video-item">
-          <img src="img/img-07.jpg" alt="Bus" class="img-fluid">
-          <figcaption class="d-flex align-items-center justify-content-center">
-            <h2>Bus</h2>
-            <a href="#">View more</a>
-          </figcaption>
-        </figure>
-        <div class="d-flex justify-content-between tm-text-gray">
-          <span class="tm-text-gray-light">16 Sep 2020</span>
-          <span>10,900 views</span>
-        </div>
-      </div>
-      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-        <figure class="effect-ming tm-video-item">
-          <img src="img/img-08.jpg" alt="New York" class="img-fluid">
-          <figcaption class="d-flex align-items-center justify-content-center">
-            <h2>New York</h2>
-            <a href="#">View more</a>
-          </figcaption>
-        </figure>
-        <div class="d-flex justify-content-between tm-text-gray">
-          <span class="tm-text-gray-light">12 Sep 2020</span>
-          <span>11,300 views</span>
-        </div>
-      </div>
-      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-        <figure class="effect-ming tm-video-item">
-          <img src="img/img-09.jpg" alt="Abstract" class="img-fluid">
-          <figcaption class="d-flex align-items-center justify-content-center">
-            <h2>Abstract</h2>
-            <a href="#">View more</a>
-          </figcaption>
-        </figure>
-        <div class="d-flex justify-content-between tm-text-gray">
-          <span class="tm-text-gray-light">10 Sep 2020</span>
-          <span>42,700 views</span>
-        </div>
-      </div>
-      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-        <figure class="effect-ming tm-video-item">
-          <img src="img/img-10.jpg" alt="Flowers" class="img-fluid">
-          <figcaption class="d-flex align-items-center justify-content-center">
-            <h2>Flowers</h2>
-            <a href="#">View more</a>
-          </figcaption>
-        </figure>
-        <div class="d-flex justify-content-between tm-text-gray">
-          <span class="tm-text-gray-light">8 Sep 2020</span>
-          <span>11,402 views</span>
-        </div>
-      </div>
-      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-        <figure class="effect-ming tm-video-item">
-          <img src="img/img-11.jpg" alt="Rosy" class="img-fluid">
-          <figcaption class="d-flex align-items-center justify-content-center">
-            <h2>Rosy</h2>
-            <a href="#">View more</a>
-          </figcaption>
-        </figure>
-        <div class="d-flex justify-content-between tm-text-gray">
-          <span class="tm-text-gray-light">4 Sep 2020</span>
-          <span>32,906 views</span>
-        </div>
-      </div>
-      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-        <figure class="effect-ming tm-video-item">
-          <img src="img/img-12.jpg" alt="Rocki" class="img-fluid">
-          <figcaption class="d-flex align-items-center justify-content-center">
-            <h2>Rocki</h2>
-            <a href="#">View more</a>
-          </figcaption>
-        </figure>
-        <div class="d-flex justify-content-between tm-text-gray">
-          <span class="tm-text-gray-light">28 Aug 2020</span>
-          <span>50,700 views</span>
-        </div>
-      </div>
-      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-        <figure class="effect-ming tm-video-item">
-          <img src="img/img-13.jpg" alt="Purple" class="img-fluid">
-          <figcaption class="d-flex align-items-center justify-content-center">
-            <h2>Purple</h2>
-            <a href="#">View more</a>
-          </figcaption>
-        </figure>
-        <div class="d-flex justify-content-between tm-text-gray">
-          <span class="tm-text-gray-light">22 Aug 2020</span>
-          <span>107,510 views</span>
-        </div>
-      </div>
-      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-        <figure class="effect-ming tm-video-item">
-          <img src="img/img-14.jpg" alt="Sea" class="img-fluid">
-          <figcaption class="d-flex align-items-center justify-content-center">
-            <h2>Sea</h2>
-            <a href="#">View more</a>
-          </figcaption>
-        </figure>
-        <div class="d-flex justify-content-between tm-text-gray">
-          <span class="tm-text-gray-light">14 Aug 2020</span>
-          <span>118,006 views</span>
-        </div>
-      </div>
-      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-        <figure class="effect-ming tm-video-item">
-          <img src="img/img-15.jpg" alt="Turtle" class="img-fluid">
-          <figcaption class="d-flex align-items-center justify-content-center">
-            <h2>Turtle</h2>
-            <a href="#">View more</a>
-          </figcaption>
-        </figure>
-        <div class="d-flex justify-content-between tm-text-gray">
-          <span class="tm-text-gray-light">9 Aug 2020</span>
-          <span>121,300 views</span>
-        </div>
-      </div>
-      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-        <figure class="effect-ming tm-video-item">
-          <img src="img/img-16.jpg" alt="Peace" class="img-fluid">
-          <figcaption class="d-flex align-items-center justify-content-center">
-            <h2>Peace</h2>
-            <a href="#">View more</a>
-          </figcaption>
-        </figure>
-        <div class="d-flex justify-content-between tm-text-gray">
-          <span class="tm-text-gray-light">3 Aug 2020</span>
-          <span>21,204 views</span>
-        </div>
+  <!-- Main Content: Gallery -->
+  <div class="container-fluid tm-mt-60">
+    <div class="row-header">
+      <h2 class="tm-text-primary" style="margin:0;">Latest Photos</h2>
+      <div class="d-flex justify-content-end align-items-center">
+        <span class="tm-text-primary">Page <input type="text" value="1" size="1" class="tm-input-paging"> of 200</span>
       </div>
     </div>
 
-    <!-- Pagination -->
-    <div class="row tm-mb-90">
-      <div class="col-12 d-flex justify-content-between align-items-center tm-paging-col">
-        <a href="javascript:void(0);" class="btn btn-primary tm-btn-prev mb-2 disabled">Previous</a>
-        <div class="tm-paging d-flex">
-          <a href="javascript:void(0);" class="active tm-paging-link">1</a>
-          <a href="javascript:void(0);" class="tm-paging-link">2</a>
-          <a href="javascript:void(0);" class="tm-paging-link">3</a>
-          <a href="javascript:void(0);" class="tm-paging-link">4</a>
-        </div>
-        <a href="javascript:void(0);" class="btn btn-primary tm-btn-next">Next Page</a>
+    <!-- Gallery Grid (CSS Grid, 4 columns on desktop) -->
+    <div class="tm-gallery tm-mb-90">
+      <!-- 16 gallery items as per original -->
+      <div>
+        <figure class="tm-video-item effect-ming">
+          <img src="img/img-03.jpg" alt="Clocks">
+          <figcaption><h2>Clocks</h2><a href="#">View more</a></figcaption>
+        </figure>
+        <div class="card-footer"><span class="tm-text-gray-light">18 Oct 2020</span><span>9,906 views</span></div>
       </div>
+      <div>
+        <figure class="tm-video-item effect-ming">
+          <img src="img/img-04.jpg" alt="Plants">
+          <figcaption><h2>Plants</h2><a href="#">View more</a></figcaption>
+        </figure>
+        <div class="card-footer"><span class="tm-text-gray-light">14 Oct 2020</span><span>16,100 views</span></div>
+      </div>
+      <div>
+        <figure class="tm-video-item effect-ming">
+          <img src="img/img-05.jpg" alt="Morning">
+          <figcaption><h2>Morning</h2><a href="#">View more</a></figcaption>
+        </figure>
+        <div class="card-footer"><span class="tm-text-gray-light">12 Oct 2020</span><span>12,460 views</span></div>
+      </div>
+      <div>
+        <figure class="tm-video-item effect-ming">
+          <img src="img/img-06.jpg" alt="Pinky">
+          <figcaption><h2>Pinky</h2><a href="#">View more</a></figcaption>
+        </figure>
+        <div class="card-footer"><span class="tm-text-gray-light">10 Oct 2020</span><span>11,402 views</span></div>
+      </div>
+      <div>
+        <figure class="tm-video-item effect-ming">
+          <img src="img/img-01.jpg" alt="Hangers">
+          <figcaption><h2>Hangers</h2><a href="#">View more</a></figcaption>
+        </figure>
+        <div class="card-footer"><span class="tm-text-gray-light">24 Sep 2020</span><span>16,008 views</span></div>
+      </div>
+      <div>
+        <figure class="tm-video-item effect-ming">
+          <img src="img/img-02.jpg" alt="Perfumes">
+          <figcaption><h2>Perfumes</h2><a href="#">View more</a></figcaption>
+        </figure>
+        <div class="card-footer"><span class="tm-text-gray-light">20 Sep 2020</span><span>12,860 views</span></div>
+      </div>
+      <div>
+        <figure class="tm-video-item effect-ming">
+          <img src="img/img-07.jpg" alt="Bus">
+          <figcaption><h2>Bus</h2><a href="#">View more</a></figcaption>
+        </figure>
+        <div class="card-footer"><span class="tm-text-gray-light">16 Sep 2020</span><span>10,900 views</span></div>
+      </div>
+      <div>
+        <figure class="tm-video-item effect-ming">
+          <img src="img/img-08.jpg" alt="New York">
+          <figcaption><h2>New York</h2><a href="#">View more</a></figcaption>
+        </figure>
+        <div class="card-footer"><span class="tm-text-gray-light">12 Sep 2020</span><span>11,300 views</span></div>
+      </div>
+      <div>
+        <figure class="tm-video-item effect-ming">
+          <img src="img/img-09.jpg" alt="Abstract">
+          <figcaption><h2>Abstract</h2><a href="#">View more</a></figcaption>
+        </figure>
+        <div class="card-footer"><span class="tm-text-gray-light">10 Sep 2020</span><span>42,700 views</span></div>
+      </div>
+      <div>
+        <figure class="tm-video-item effect-ming">
+          <img src="img/img-10.jpg" alt="Flowers">
+          <figcaption><h2>Flowers</h2><a href="#">View more</a></figcaption>
+        </figure>
+        <div class="card-footer"><span class="tm-text-gray-light">8 Sep 2020</span><span>11,402 views</span></div>
+      </div>
+      <div>
+        <figure class="tm-video-item effect-ming">
+          <img src="img/img-11.jpg" alt="Rosy">
+          <figcaption><h2>Rosy</h2><a href="#">View more</a></figcaption>
+        </figure>
+        <div class="card-footer"><span class="tm-text-gray-light">4 Sep 2020</span><span>32,906 views</span></div>
+      </div>
+      <div>
+        <figure class="tm-video-item effect-ming">
+          <img src="img/img-12.jpg" alt="Rocki">
+          <figcaption><h2>Rocki</h2><a href="#">View more</a></figcaption>
+        </figure>
+        <div class="card-footer"><span class="tm-text-gray-light">28 Aug 2020</span><span>50,700 views</span></div>
+      </div>
+      <div>
+        <figure class="tm-video-item effect-ming">
+          <img src="img/img-13.jpg" alt="Purple">
+          <figcaption><h2>Purple</h2><a href="#">View more</a></figcaption>
+        </figure>
+        <div class="card-footer"><span class="tm-text-gray-light">22 Aug 2020</span><span>107,510 views</span></div>
+      </div>
+      <div>
+        <figure class="tm-video-item effect-ming">
+          <img src="img/img-14.jpg" alt="Sea">
+          <figcaption><h2>Sea</h2><a href="#">View more</a></figcaption>
+        </figure>
+        <div class="card-footer"><span class="tm-text-gray-light">14 Aug 2020</span><span>118,006 views</span></div>
+      </div>
+      <div>
+        <figure class="tm-video-item effect-ming">
+          <img src="img/img-15.jpg" alt="Turtle">
+          <figcaption><h2>Turtle</h2><a href="#">View more</a></figcaption>
+        </figure>
+        <div class="card-footer"><span class="tm-text-gray-light">9 Aug 2020</span><span>121,300 views</span></div>
+      </div>
+      <div>
+        <figure class="tm-video-item effect-ming">
+          <img src="img/img-16.jpg" alt="Peace">
+          <figcaption><h2>Peace</h2><a href="#">View more</a></figcaption>
+        </figure>
+        <div class="card-footer"><span class="tm-text-gray-light">3 Aug 2020</span><span>21,204 views</span></div>
+      </div>
+    </div>
+
+    <!-- Pagination (flexbox) -->
+    <div class="tm-paging-col tm-mb-90">
+      <a href="javascript:void(0);" class="btn btn-primary disabled">Previous</a>
+      <div class="tm-paging">
+        <a href="javascript:void(0);" class="tm-paging-link active">1</a>
+        <a href="javascript:void(0);" class="tm-paging-link">2</a>
+        <a href="javascript:void(0);" class="tm-paging-link">3</a>
+        <a href="javascript:void(0);" class="tm-paging-link">4</a>
+      </div>
+      <a href="javascript:void(0);" class="btn btn-primary">Next Page</a>
     </div>
   </div>
 
-  <!-- Footer -->
-  <footer class="tm-bg-gray pt-5 pb-3 tm-text-gray tm-footer">
+  <!-- Footer (pure flexbox) -->
+  <footer class="tm-bg-gray tm-footer">
     <div class="container-fluid tm-container-small">
-      <div class="row">
-        <div class="col-lg-6 col-md-12 col-12 px-5 mb-5">
-          <h3 class="tm-text-primary mb-4 tm-footer-title">About Catalog-Z</h3>
+      <div class="footer-row">
+        <div class="footer-col footer-col-about">
+          <h3 class="tm-text-primary tm-footer-title">About Catalog-Z</h3>
           <p>Catalog-Z is free Bootstrap 5 Alpha 2 HTML Template for video and photo websites. You can freely use this TemplateMo layout for a front-end integration with any kind of CMS website.</p>
         </div>
-        <div class="col-lg-3 col-md-6 col-sm-6 col-12 px-5 mb-5">
-          <h3 class="tm-text-primary mb-4 tm-footer-title">Our Links</h3>
-          <ul class="tm-footer-links pl-0">
+        <div class="footer-col footer-col-links">
+          <h3 class="tm-text-primary tm-footer-title">Our Links</h3>
+          <ul class="tm-footer-links">
             <li><a href="#">Advertise</a></li>
             <li><a href="#">Support</a></li>
             <li><a href="#">Our Company</a></li>
             <li><a href="#">Contact</a></li>
           </ul>
         </div>
-        <div class="col-lg-3 col-md-6 col-sm-6 col-12 px-5 mb-5">
-          <ul class="tm-social-links d-flex justify-content-end pl-0 mb-5">
-            <li class="mb-2"><a href="https://facebook.com"><i class="fab fa-facebook-f"></i></a></li>
-            <li class="mb-2"><a href="https://twitter.com"><i class="fab fa-twitter"></i></a></li>
-            <li class="mb-2"><a href="https://instagram.com"><i class="fab fa-instagram"></i></a></li>
-            <li class="mb-2"><a href="https://pinterest.com"><i class="fab fa-pinterest"></i></a></li>
+        <div class="footer-col footer-col-social">
+          <ul class="tm-social-links">
+            <li><a href="https://facebook.com"><i class="fab fa-facebook-f"></i></a></li>
+            <li><a href="https://twitter.com"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="https://instagram.com"><i class="fab fa-instagram"></i></a></li>
+            <li><a href="https://pinterest.com"><i class="fab fa-pinterest"></i></a></li>
           </ul>
-          <a href="#" class="tm-text-gray text-right d-block mb-2">Terms of Use</a>
-          <a href="#" class="tm-text-gray text-right d-block">Privacy Policy</a>
+          <a href="#" class="tm-text-gray d-block mb-2">Terms of Use</a>
+          <a href="#" class="tm-text-gray d-block">Privacy Policy</a>
         </div>
       </div>
-      <div class="row">
-        <div class="col-lg-8 col-md-7 col-12 px-5 mb-3">
-          Copyright 2020 Catalog-Z Company. All rights reserved.
-        </div>
-        <div class="col-lg-4 col-md-5 col-12 px-5 text-right">
-          Designed by <a href="https://templatemo.com" class="tm-text-gray" rel="sponsored" target="_parent">TemplateMo</a>
-        </div>
+      <div class="copyright-row">
+        <div>Copyright 2020 Catalog-Z Company. All rights reserved.</div>
+        <div>Designed by <a href="https://templatemo.com" class="tm-text-gray" target="_blank">TemplateMo</a></div>
       </div>
     </div>
   </footer>
 
-  <!-- Scripts -->
+  <!-- Scripts: jQuery + Parallax + mobile toggler (no Bootstrap JS) -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/parallax-js@1.5.0/dist/parallax.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
+    // Loader animation
     $(window).on("load", function() {
       $('body').addClass('loaded');
     });
+    // Parallax initialization
     $('.tm-hero').parallax({ imageSrc: 'img/hero.jpg' });
+
+    // Mobile navbar toggle (pure JS, no Bootstrap)
+    const toggler = document.getElementById('navbarToggler');
+    const navbarCollapse = document.getElementById('navbarNav');
+    if (toggler && navbarCollapse) {
+      toggler.addEventListener('click', function() {
+        navbarCollapse.classList.toggle('show');
+      });
+    }
   </script>
 </body>
 </html>
